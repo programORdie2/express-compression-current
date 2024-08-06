@@ -2,15 +2,18 @@
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
-[![Build Status][github-actions-ci-image]][github-actions-ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
 
-Node.js compression middleware.
+A fork of the default Express.js middleware with support for BROTLI and updated package list.
 
 The following compression codings are supported:
-
-  - deflate
+  - brotli (br)
   - gzip
+  - deflate
+  
+Thanks to the new compressing algorithm is this library this library saves almosy 25% over standard gzip without sacrificing runtime performance.
+
+Note: this project was forked from the [compression](https://github.com/expressjs/compression) project, which is the standard compression middleware for Express, and it has been updated to include support for the BROTLI encoding and an updated package list.
+90% of the code in this project is unchanged relative to the original project.
 
 ## Install
 
@@ -19,13 +22,12 @@ This is a [Node.js](https://nodejs.org/en/) module available through the
 [`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
 
 ```bash
-$ npm install compression
+$ npm install express-compression-current
 ```
 
 ## API
-
 ```js
-var compression = require('compression')
+const compression = require('express-compression-current');
 ```
 
 ### compression([options])
@@ -145,11 +147,11 @@ The default `filter` function. This is used to construct a custom filter
 function that is an extension of the default function.
 
 ```js
-var compression = require('compression')
+var compression = require('express-compression-current')
 var express = require('express')
 
 var app = express()
-app.use(compression({ filter: shouldCompress }))
+app.use(compression({filter: shouldCompress}))
 
 function shouldCompress (req, res) {
   if (req.headers['x-no-compression']) {
@@ -175,7 +177,7 @@ When using this module with express or connect, simply `app.use` the module as
 high as you like. Requests that pass through the middleware will be compressed.
 
 ```js
-var compression = require('compression')
+var compression = require('express-compression-current')
 var express = require('express')
 
 var app = express()
@@ -197,7 +199,7 @@ You can achieve this by calling `res.flush()` when you need the data written to
 actually make it to the client.
 
 ```js
-var compression = require('compression')
+var compression = require('express-compression-current')
 var express = require('express')
 
 var app = express()
@@ -228,11 +230,7 @@ app.get('/events', function (req, res) {
 
 [MIT](LICENSE)
 
-[npm-image]: https://img.shields.io/npm/v/compression.svg
-[npm-url]: https://npmjs.org/package/compression
-[coveralls-image]: https://img.shields.io/coveralls/expressjs/compression/master.svg
-[coveralls-url]: https://coveralls.io/r/expressjs/compression?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/compression.svg
-[downloads-url]: https://npmjs.org/package/compression
-[github-actions-ci-image]: https://badgen.net/github/checks/expressjs/compression/master?label=ci
-[github-actions-ci-url]: https://github.com/expressjs/compression/actions?query=workflow%3Aci
+[npm-image]: https://img.shields.io/npm/v/express-compression-current.svg
+[npm-url]: https://npmjs.org/package/express-compression-current
+[downloads-image]: https://img.shields.io/npm/dm/express-compression-current.svg
+[downloads-url]: https://npmjs.org/package/express-compression-current
